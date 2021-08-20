@@ -13,7 +13,16 @@ const {
   emailExiste,
   existeUsuarioPorId,
 } = require("../helpers/db-validators");
-const { validarCampos } = require("../middlewares/validar-campos");
+// const { validarCampos } = require("../middlewares/validar-campos");
+// const { validarJWT } = require("../middlewares/validar-jwt");
+// const { esAdmin, tieneRole } = require("../middlewares/validar-roles");
+
+const {
+  validarCampos,
+  validarJWT,
+  esAdmin,
+  tieneRole,
+} = require("../middlewares");
 
 const router = Router();
 
@@ -45,6 +54,9 @@ router.post(
 router.delete(
   "/:id",
   [
+    validarJWT,
+    // esAdmin,
+    tieneRole("ADMIN_ROL", "USER_ROL"),
     check("id", "No es un ID valido").isMongoId(),
     check("id").custom(existeUsuarioPorId),
     validarCampos,

@@ -64,12 +64,9 @@ const usuarioPut = async (req, res = response) => {
 const usuarioDelete = async (req, res = response) => {
   const { id } = req.params;
 
-  // borrar fisicamente
-  // const usuario = await Usuario.findByIdAndDelete(id); // borrar los usuario de esta manera hace que se pierda la integridad de referencia
+  const usuario = await Usuario.findByIdAndUpdate(id, { status: false });
 
-  // Desactivar el usuario
-  const usuario = await Usuario.findByIdAndUpdate(id, { statuss: false });
-  res.json(usuario);
+  res.json({ usuario });
 };
 const usuarioPatch = (req, res = response) => {
   res.json({
