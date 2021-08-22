@@ -5,7 +5,6 @@ const {
   usuarioPost,
   usuarioPut,
   usuarioDelete,
-  usuarioPatch,
 } = require("../controllers/userController");
 
 const {
@@ -63,6 +62,6 @@ router.delete(
   ],
   usuarioDelete,
 );
-router.patch("/", usuarioPatch);
+// router.patch("/", usuarioPatch);
 
 module.exports = router;

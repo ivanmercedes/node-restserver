@@ -1,7 +1,7 @@
 const { response, request } = require("express");
 const bcryptjs = require("bcryptjs");
 
-const Usuario = require("../models/user");
+const Usuario = require("../models/");
 
 const usuarioGet = async (req = request, res = response) => {
   const { limit = 5, desde = 0 } = req.query;
@@ -68,16 +68,10 @@ const usuarioDelete = async (req, res = response) => {
 
   res.json({ usuario });
 };
-const usuarioPatch = (req, res = response) => {
-  res.json({
-    msg: "patch API - Controller",
-  });
-};
 
 module.exports = {
   usuarioGet,
   usuarioPost,
   usuarioPut,
   usuarioDelete,
-  usuarioPatch,
 };
