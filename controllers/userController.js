@@ -1,7 +1,7 @@
 const { response, request } = require("express");
 const bcryptjs = require("bcryptjs");
 
-const Usuario = require("../models/");
+const User = require("../models/user");
 
 const usuarioGet = async (req = request, res = response) => {
   const { limit = 5, desde = 0 } = req.query;
@@ -13,8 +13,8 @@ const usuarioGet = async (req = request, res = response) => {
   //   const total = await Usuario.countDocuments({ status: true });
 
   const [total, usuarios] = await Promise.all([
-    Usuario.countDocuments({ status: true }),
-    Usuario.find({ status: true }).skip(Number(desde)).limit(Number(limit)),
+    User.countDocuments({ status: true }),
+    User.find({ status: true }).skip(Number(desde)).limit(Number(limit)),
   ]);
   res.json({
     total,
@@ -23,10 +23,10 @@ const usuarioGet = async (req = request, res = response) => {
 };
 const usuarioPost = async (req, res = response) => {
   const { name, email, password, ip, rol } = req.body;
-  const usuario = new Usuario({ name, email, password, ip, rol });
+  const usuario = new User({ name, email, password, ip, rol });
 
   // verificar si el correo existe
-  const existeEmail = await Usuario.findOne({ email });
+  const existeEmail = await User.findOne({ email });
 
   if (existeEmail) {
     return res.status(400).json({
@@ -57,14 +57,14 @@ const usuarioPut = async (req, res = response) => {
     resto.password = bcryptjs.hashSync(password, salt);
   }
 
-  const usuario = await Usuario.findByIdAndUpdate(id, resto);
+  const usuario = await User.findByIdAndUpdate(id, resto);
 
   res.json(usuario);
 };
 const usuarioDelete = async (req, res = response) => {
   const { id } = req.params;
 
-  const usuario = await Usuario.findByIdAndUpdate(id, { status: false });
+  const usuario = await User.findByIdAndUpdate(id, { status: false });
 
   res.json({ usuario });
 };
