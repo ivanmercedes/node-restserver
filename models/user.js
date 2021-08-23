@@ -17,6 +17,9 @@ const UsuarioSchema = Schema({
   avatar: {
     type: String,
   },
+  img: {
+    type: String,
+  },
   ip: {
     type: String,
   },

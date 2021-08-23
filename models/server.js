@@ -43,6 +43,7 @@ class Server {
     // Config express fileupload
     this.app.use(
       fileUpload({
+        createParentPath: true,
         useTempFiles: true,
         tempFileDir: "/tmp/",
       }),
