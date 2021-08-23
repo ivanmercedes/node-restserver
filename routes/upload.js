@@ -6,6 +6,7 @@ const {
   uploadFile,
   updateFile,
   getFile,
+  updateFileCloudinary,
 } = require("../controllers/uploadController");
 const { coleccionesPermitidas } = require("../helpers");
 
@@ -22,7 +23,8 @@ router.put(
     ),
     validarCampos,
   ],
-  updateFile,
+  // updateFile,
+  updateFileCloudinary,
 );
 
 router.get(
